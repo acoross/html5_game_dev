@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    
+<script>
+    var func1 = function(){
+        var tmp = {
+                "id" : "shin",
+                "x" : -1,
+                "y" : -1,
+                "z" : 0,
+                hp : 100,
+                getHp : function(num){
+                    return this.hp + num + this.x;
+                }
+            };
+        console.log(tmp.getHp(10));
+    };
+
+    var func2 = function(){
+        var json1 = 
+            '{\
+                "frames": {\
+                    "chaingun.png": {\
+                        "frame": {"x": 1766,"y": 202,"w": 42,"h": 34},\
+                        "rotated": false,"trimmed": true,\
+                        "spriteSourceSize": {"x": 38,"y": 32,"w": 42,"h": 34},\
+                        "sourceSize": {"w": 128,"h": 128}\
+                    },\
+                    "chaingun_impact.png": {\
+                        "frame": {"x": 1162,"y": 322,"w": 38,"h": 34},\
+                        "rotated": false,"trimmed": true,\
+                        "spriteSourceSize": {"x": 110,"y": 111,"w": 38,"h": 34},\
+                        "sourceSize": {"w": 256,"h": 256}\
+                    }\
+                }\
+            }';
+
+        var parsed = JSON.parse(json1);
+        
+        for (var k in parsed.frames)
+        {
+            console.log(k);
+            console.log(parsed.frames[k]);
+        }
+    };
+    func2();
+
+    var func3 = function(){
+
+    };
+    func3();
+
+</script>
+
+</body>
+</html>

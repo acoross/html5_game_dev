@@ -4,54 +4,38 @@
 </head>
 <body>
     
+<script src="core.js"></script>
+<script src="spritesheet.js"></script>
 <script>
-    var func1 = function(){
-        var tmp = {
-                "id" : "shin",
-                "x" : -1,
-                "y" : -1,
-                "z" : 0,
-                hp : 100,
-                getHp : function(num){
-                    return this.hp + num + this.x;
-                }
-            };
-        console.log(tmp.getHp(10));
+    function loadJSON(filename, callback){
+        var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET', filename, true);
+        xobj.onreadystatechange = function(){
+            if (xobj.readyState === XMLHttpRequest.DONE) {
+                callback(xobj.responseText);
+            }
+        };
+        xobj.send(null);
+    }
+
+    var setup = function(){
+        canvas = document.createElement("canvas");
+        ctx = canvas.getContext('2d');
+        canvas.setAttribute('width', 500);
+        canvas.setAttribute('height', 700);    
+        document.body.appendChild(canvas);
+                
+        loadJSON("girls.json", function(txt){
+            SpriteSheetClass.prototype.load("girls.png");
+            SpriteSheetClass.prototype.parseAtlasDefinition(txt);
+            
+            console.log(SpriteSheetClass.prototype);
+
+            ctx.drawImage(SpriteSheetClass.prototype.img, 0, 0);
+        });
     };
-
-    var func2 = function(){
-        var json1 = 
-            '{\
-                "frames": {\
-                    "chaingun.png": {\
-                        "frame": {"x": 1766,"y": 202,"w": 42,"h": 34},\
-                        "rotated": false,"trimmed": true,\
-                        "spriteSourceSize": {"x": 38,"y": 32,"w": 42,"h": 34},\
-                        "sourceSize": {"w": 128,"h": 128}\
-                    },\
-                    "chaingun_impact.png": {\
-                        "frame": {"x": 1162,"y": 322,"w": 38,"h": 34},\
-                        "rotated": false,"trimmed": true,\
-                        "spriteSourceSize": {"x": 110,"y": 111,"w": 38,"h": 34},\
-                        "sourceSize": {"w": 256,"h": 256}\
-                    }\
-                }\
-            }';
-
-        var parsed = JSON.parse(json1);
-        
-        for (var k in parsed.frames)
-        {
-            console.log(k);
-            console.log(parsed.frames[k]);
-        }
-    };
-    func2();
-
-    var func3 = function(){
-
-    };
-    func3();
+    setup();
 
 </script>
 
